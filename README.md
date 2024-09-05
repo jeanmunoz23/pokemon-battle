@@ -18,6 +18,9 @@ y tenemos que hacerlos batallar entre ellos.
 4. Implementar Responsividad básica.
 5. Conectar con el Backend
 
+## Visual
+![Descripción de la imagen](Design.png)
+
 ## Algoritmo de Batalla
 
 Para el cálculo de la batalla, ten en consideración lo siguiente:
@@ -37,24 +40,41 @@ Backend:
 - [Sqlite](https://www.sqlite.org/)
 
 Frontend:
-- React
-- MaterialUI
+- [React](https://legacy.reactjs.org/)
+- [MaterialUI](https://mui.com/material-ui/)
 
-## Project setup
+## Project setup Local 
+
+### Project setup backend
 
 ```bash
+$ cd backend
 $ npm install
 ```
 
-## Compile and run the project
+### Project setup frontend
 
 ```bash
-# development
-$ npm run start
+$ cd frontend
+$ npm install
+```
 
-# watch mode
+### Compile and run the project
+
+```bash
+$ cd backend
 $ npm run start:dev
+```
 
+```bash
+$ cd frontend
+$ npm start
+```
+
+## Project setup Docker
+
+```bash
+$ docker compose up --build
 ```
 
 ## License

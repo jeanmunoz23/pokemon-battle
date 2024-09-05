@@ -43,7 +43,7 @@ export class PokemonService {
     return this.battleResultRepository.find();
   }
 
-  // Método para iniciar una batalla entre dos Pokémon
+  // Method to start a battle between two Pokémon
   async battle(
     pokemon1Id: string,
     pokemon2Id: string,
@@ -55,11 +55,10 @@ export class PokemonService {
       throw new BadRequestException('Uno o ambos Pokémon no existen');
     }
 
-    // Clonar los objetos para no modificar el estado original
     const p1 = { ...pokemon1 };
     const p2 = { ...pokemon2 };
 
-    // Determinar quién ataca primero basado en la velocidad y luego en el ataque
+    // Determine who attacks first based on speed, and then on attack
     let firstAttacker = p1;
     let secondAttacker = p2;
 
@@ -70,7 +69,6 @@ export class PokemonService {
       firstAttacker = p2;
       secondAttacker = p1;
     }
-    console.log('init', firstAttacker.name);
     // Batalla
     while (p1.hp > 0 && p2.hp > 0) {
       // First attacker attacks second attacker
@@ -79,7 +77,6 @@ export class PokemonService {
       await this.pokemonRepository.update(secondAttacker.id, {
         hp: secondAttacker.hp,
       });
-      console.log('secondAttacker.hp ', secondAttacker.hp);
 
       // Check if second attacker is defeated
       if (secondAttacker.hp <= 0) {
@@ -100,7 +97,6 @@ export class PokemonService {
       await this.pokemonRepository.update(firstAttacker.id, {
         hp: firstAttacker.hp,
       });
-      console.log('firstAttacker.hp ', firstAttacker.hp);
 
       // Check if first attacker is defeated
       if (firstAttacker.hp <= 0) {
@@ -116,5 +112,29 @@ export class PokemonService {
     }
 
     return null;
+  }
+
+  async resetDatabase(): Promise<void> {
+    const filePath = path.join(__dirname, '../resources/pokemons.json');
+    console.log(`File path for reset: ${filePath}`);
+
+    try {
+      await this.pokemonRepository.clear();
+
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const pokemonsData = JSON.parse(fileContent);
+
+      if (Array.isArray(pokemonsData.pokemon)) {
+        await this.pokemonRepository.save(pokemonsData.pokemon);
+        console.log('Database has been reset with initial data.');
+      } else {
+        throw new Error(
+          'Invalid data format in pokemons.json. Expected an array of pokemons.',
+        );
+      }
+    } catch (error) {
+      console.error('Error resetting database:', error.message);
+      throw new BadRequestException('Failed to reset the database.');
+    }
   }
 }

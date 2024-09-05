@@ -1,9 +1,9 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { Pokemon } from './pokemon.entity';
 import { BattleResult } from './battle-result.entity';
 
-@Controller('pokemon')
+@Controller('pokemons')
 export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
 
@@ -12,12 +12,12 @@ export class PokemonController {
     return this.pokemonService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string): Promise<Pokemon> {
-    return this.pokemonService.findOne(id);
+  @Post('reset')
+  async resetDatabase(): Promise<void> {
+    return await this.pokemonService.resetDatabase();
   }
 
-  @Get('battle/:pokemon1Id/:pokemon2Id')
+  @Post('battle/:pokemon1Id/:pokemon2Id')
   battle(
     @Param('pokemon1Id') pokemon1Id: string,
     @Param('pokemon2Id') pokemon2Id: string,
