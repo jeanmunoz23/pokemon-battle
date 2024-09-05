@@ -34,16 +34,12 @@ cd frontend
 
 ```bash
 npm install
-# o
-yarn install
 ```
 
 ### Ejecutar la Aplicación
 
 ```bash
 npm start
-# o
-yarn start
 ```
 
 Visita `http://localhost:3000` o `http://localhost:3001` en tu navegador para ver la aplicación.
