@@ -43,23 +43,23 @@ Frontend:
 - [React](https://legacy.reactjs.org/)
 - [MaterialUI](https://mui.com/material-ui/)
 
-## Project setup Local 
+## Configuración del proyecto Local 
 
-### Project setup backend
+### Configuración del proyecto backend
 
 ```bash
 $ cd backend
 $ npm install
 ```
 
-### Project setup frontend
+### Configuración del proyecto frontend
 
 ```bash
 $ cd frontend
 $ npm install
 ```
 
-### Compile and run the project
+### Compilar y ejecutar el proyecto
 
 ```bash
 $ cd backend
@@ -71,7 +71,7 @@ $ cd frontend
 $ npm start
 ```
 
-## Project setup Docker
+## Configuración del proyecto Docker
 
 ```bash
 $ docker compose up --build
